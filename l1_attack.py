@@ -174,6 +174,7 @@ class EADL1:
         o_bestattack = [np.zeros(imgs[0].shape)]*batch_size
         
         for outer_step in range(self.BINARY_SEARCH_STEPS):
+            print("current best l1", o_bestl1)
             # completely reset adam's internal state.
             self.sess.run(self.init)
             batch = imgs[:batch_size]
@@ -209,6 +210,7 @@ class EADL1:
                 # check if we should abort search if we're getting nowhere.
                 if self.ABORT_EARLY and iteration%(self.MAX_ITERATIONS//10) == 0:
                     if l > prev*.9999:
+						print("Early stopping because there is no improvement")
                         break
                     prev = l
 
